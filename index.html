@@ -1,0 +1,59 @@
+<!DOCTYPE html>   
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta charset="utf-8" />
+ <title>Todo list</title>
+ <meta NAME="description" CONTENT="Todo list. ">
+ <meta NAME="keywords" CONTENT="to do, list">
+ <meta NAME="author" CONTENT="progsky>
+ <meta NAME="language" CONTENT="English">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css">
+ 
+ <link rel="stylesheet" type="text/css" href="css/main.css">
+
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
+
+</head>
+
+<body ng-app="MainApp">
+
+  <div class="centriraj" ng-controller="MainController">
+
+    <h2 id="hide">Добавить задачу<span id="special"></span></h2>
+    <input type="text" placeholder="Укажите вашу задачу" id="textbox" ng-model="inputTaskName" ng-enter="addTask(inputTaskName)"/>
+    <input type="button" value="Создать" id="button" ng-click="addTask(inputTaskName)"/>
+
+    <div class="tasksContainer" ng-show="visibilityTasksContainer">
+      <h2>Задачи</h2>
+      <hr>
+      <ul class="tasklist">
+        <li ng-class="task.completed==true?'complete':''" ng-repeat="task in tasks" ng-dblclick="deleteTask($index)" ng-click="toggleCompleted($index)" ng-show="task.show==true">{{task.name}}</li>
+      </ul>
+      <!-- Info instructions section and interaction buttons go here -->
+      <div class="info">
+        <p style="text-align: center">**Один клик для завершения задачи. Дважды щелкните, чтобы удалить**</p>
+        <button class="buttonStyle buttonStyle-blue active" ng-click="showNotCompletedTasks()">Активна</button>
+        <button class="buttonStyle buttonStyle-blue complete" ng-click="showCompletedTasks()">Завершена</button>
+        <button class="buttonStyle buttonStyle-blue showAll" ng-click="showAllTasks()">Показать все</button>
+        <button class="buttonStyle buttonStyle-blue completedClear" ng-click="deleteCompleted()">Удалить завершенные</button>
+        <button id="clearAll" class="buttonStyle buttonStyle-blue" ng-click="deleteAll()">Удалить все</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+
+ <script src="js/directives/NgEnter.js"></script>
+
+  <script src="js/controllers/MainController.js"></script>
+
+
+
+  </html>
